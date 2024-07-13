@@ -6,16 +6,19 @@ import {
   TREATMENT,
 } from "@/shared/consts";
 import { Profile } from "@/shared/types";
-import { useDynamicModals } from "@dynamic-labs/sdk-react-core";
+import { useDynamicContext } from "@dynamic-labs/sdk-react-core";
 import { useState } from "react";
-import shortUUID from "short-uuid";
 export default () => {
-  const { setShowLinkNewWalletModal } = useDynamicModals();
+  const { setShowAuthFlow, isAuthenticated } = useDynamicContext();
   const localStorageProfile = window.localStorage.getItem("userProfile");
 
-  const userProfile: Profile | null = localStorageProfile
+  let userProfile: Profile | null = localStorageProfile
     ? JSON.parse(localStorageProfile)
     : null;
+
+  if (!isAuthenticated) {
+    userProfile = null;
+  }
 
   const [diagnosisType, setDiagnosisType] = useState(
     userProfile ? userProfile.diagnosisType : ""
@@ -42,9 +45,9 @@ export default () => {
   const [error, setError] = useState(false);
 
   const handleSubmit = async () => {
-    setShowLinkNewWalletModal(true);
-    const short = shortUUID();
-    console.log(short.generate());
+    if (!isAuthenticated) {
+      setShowAuthFlow(true);
+    }
 
     console.log(
       `diagnosisType: ${diagnosisType}; diagnosisSource: ${diagnosisSource}; medication: ${medication}; treatment: ${treatment}; disorderSubtype: ${disorderSubtype}; focusGroup: ${focusGroup}; firstSymptomsAge: ${firstSymptomsAge}`

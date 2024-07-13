@@ -1,9 +1,9 @@
-import { useAccount } from "wagmi";
 import { Link } from "react-router-dom";
 import Profile from "./profile/Profile";
+import { useDynamicContext } from "@dynamic-labs/sdk-react-core";
 
 function Home() {
-  const { isConnected } = useAccount();
+  const { isAuthenticated } = useDynamicContext();
   const hasProfile = window.localStorage.getItem("userProfile");
 
   return (
@@ -14,7 +14,7 @@ function Home() {
           Hi. <br />
           Thanks for contributing to womxn’s OCD health. Let’s get started.{" "}
         </h1>
-        {!isConnected ? (
+        {!isAuthenticated ? (
           <>
             <Profile />
           </>

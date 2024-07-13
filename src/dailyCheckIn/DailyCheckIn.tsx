@@ -3,9 +3,11 @@ import { DailyCheckIn, Profile } from "@/shared/types";
 import Form from "./Form";
 import { useState } from "react";
 import { router } from "@/main";
+import { useDynamicContext } from "@dynamic-labs/sdk-react-core";
 
 export default () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const { handleLogOut } = useDynamicContext();
 
   const handleSubmit = async (data: any) => {
     setIsSubmitting(true);
@@ -28,6 +30,7 @@ export default () => {
     const fileName = await storeDataOnIPFS(dailyCheckIn);
     console.log("fileName", fileName);
 
+    handleLogOut();
     router.navigate("/");
   };
 
