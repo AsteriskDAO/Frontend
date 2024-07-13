@@ -4,7 +4,7 @@ import { Group } from "@semaphore-protocol/group";
 import { generateProof, verifyProof } from "@semaphore-protocol/proof";
 
 export default () => {
-  const { privateKey, publicKey, commitment: commitment1 } = new Identity();
+  const { privateKey, commitment } = new Identity();
 
   useEffect(() => {
     setTimeout(() => {
@@ -32,9 +32,7 @@ export default () => {
 
     const group1 = new Group();
 
-    group1.addMember(commitment1);
-
-    // group1.generateMerkleProof(0);
+    group1.addMember(commitment);
 
     const scope = group1.root;
 
@@ -62,9 +60,6 @@ export default () => {
       console.log("error", e);
     }
   };
-
-  // // Static method.
-  // Identity.verifySignature(message, signature, identity1.publicKey);
 
   return (
     <div>
