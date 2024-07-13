@@ -13,8 +13,9 @@ import { config } from "./wagmi.ts";
 import "./index.css";
 import { DynamicWagmiConnector } from "@dynamic-labs/wagmi-connector";
 import { EthereumWalletConnectors } from "@dynamic-labs/ethereum";
-import Profile from "./profile/Profile.tsx";
 import DailyCheckIn from "./dailyCheckIn/DailyCheckIn.tsx";
+import ProfilePage from "./profile/ProfilePage.tsx";
+import Home from "./Home.tsx";
 
 globalThis.Buffer = Buffer;
 
@@ -40,18 +41,24 @@ const evmNetworks = [
   },
 ];
 
-const router = createBrowserRouter([
+export const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
-  },
-  {
-    path: "/profile",
-    element: <Profile />,
-  },
-  {
-    path: "/check-in",
-    element: <DailyCheckIn />,
+    children: [
+      {
+        path: "/",
+        element: <Home />,
+      },
+      {
+        path: "/profile",
+        element: <ProfilePage />,
+      },
+      {
+        path: "/check-in",
+        element: <DailyCheckIn />,
+      },
+    ],
   },
 ]);
 

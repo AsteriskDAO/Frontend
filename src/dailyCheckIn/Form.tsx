@@ -138,7 +138,7 @@ const HealthForm: React.FC<{ onSubmit: (data: any) => void }> = ({
 
       <label className="form-control w-full mb-4 max-w-md">
         <div className="label">
-          <span className="label-text text-base">Symptoms Present?</span>
+          <span className="label-text text-base">Are you having symptoms?</span>
         </div>
         <input
           type="checkbox"
@@ -151,7 +151,9 @@ const HealthForm: React.FC<{ onSubmit: (data: any) => void }> = ({
           <div className="ml-6">
             <label className="form-control w-full mb-4 max-w-md">
               <div className="label">
-                <span className="label-text text-base">Severity</span>
+                <span className="label-text text-base">
+                  How severe are they?
+                </span>
               </div>
               <select
                 name="symptoms.severity"
@@ -171,7 +173,9 @@ const HealthForm: React.FC<{ onSubmit: (data: any) => void }> = ({
             </label>
             <label className="form-control w-full mb-4 max-w-md">
               <div className="label">
-                <span className="label-text text-base">Description</span>
+                <span className="label-text text-base">
+                  What are you experiencing, today?
+                </span>
               </div>
               <textarea
                 name="symptoms.description"
@@ -186,7 +190,9 @@ const HealthForm: React.FC<{ onSubmit: (data: any) => void }> = ({
 
       <label className="form-control w-full mb-4 max-w-md">
         <div className="label">
-          <span className="label-text text-base">Side Effects Present?</span>
+          <span className="label-text text-base">
+            Are you having any side effects from your medications?
+          </span>
         </div>
         <input
           type="checkbox"
@@ -199,7 +205,9 @@ const HealthForm: React.FC<{ onSubmit: (data: any) => void }> = ({
           <div className="ml-6">
             <label className="form-control w-full mb-4 max-w-md">
               <div className="label">
-                <span className="label-text text-base">Severity</span>
+                <span className="label-text text-base">
+                  How severe are they?
+                </span>
               </div>
               <select
                 name="sideEffects.severity"
@@ -221,7 +229,9 @@ const HealthForm: React.FC<{ onSubmit: (data: any) => void }> = ({
             </label>
             <label className="form-control w-full mb-4 max-w-md">
               <div className="label">
-                <span className="label-text text-base">Description</span>
+                <span className="label-text text-base">
+                  Please share what side effects you’re experiencing
+                </span>
               </div>
               <textarea
                 name="sideEffects.description"
@@ -236,7 +246,9 @@ const HealthForm: React.FC<{ onSubmit: (data: any) => void }> = ({
 
       <label className="form-control w-full mb-4 max-w-md">
         <div className="label">
-          <span className="label-text text-base">Menstrual Cycle</span>
+          <span className="label-text text-base">
+            Where are you in your menstrual cycle?
+          </span>
         </div>
         <select
           className="select select-bordered"

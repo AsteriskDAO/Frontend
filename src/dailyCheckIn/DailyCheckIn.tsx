@@ -1,4 +1,3 @@
-import Header from "@/Header";
 import { storeDataOnIPFS } from "@/shared/fleek";
 import { DailyCheckIn, Profile } from "@/shared/types";
 import Form from "./Form";
@@ -27,7 +26,6 @@ export default () => {
 
   return (
     <>
-      <Header />
       <div className="main-container">
         <Form onSubmit={(data) => handleSubmit(data)} />
       </div>
