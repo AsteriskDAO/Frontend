@@ -1,9 +1,14 @@
 import { storeDataOnIPFS } from "@/shared/fleek";
 import { DailyCheckIn, Profile } from "@/shared/types";
 import Form from "./Form";
+import { useState } from "react";
+import { router } from "@/main";
 
 export default () => {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
   const handleSubmit = async (data: any) => {
+    setIsSubmitting(true);
     console.log("data", data);
     const localStorageProfile = window.localStorage.getItem("userProfile");
 
@@ -22,12 +27,21 @@ export default () => {
 
     const fileName = await storeDataOnIPFS(dailyCheckIn);
     console.log("fileName", fileName);
+
+    router.navigate("/");
   };
 
   return (
     <>
       <div className="main-container">
-        <Form onSubmit={(data) => handleSubmit(data)} />
+        {isSubmitting ? (
+          <div className="py-[140px]">
+            <div>Wait while we are submitting your daily check-in</div>
+            <span className="loading loading-spinner loading-lg"></span>
+          </div>
+        ) : (
+          <Form onSubmit={(data) => handleSubmit(data)} />
+        )}
       </div>
     </>
   );

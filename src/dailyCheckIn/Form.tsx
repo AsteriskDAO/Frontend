@@ -121,7 +121,7 @@ const HealthForm: React.FC<{ onSubmit: (data: any) => void }> = ({
           max="100"
           value={formState.howAreYouFeeling}
           onChange={handleChange}
-          className="range"
+          className="range range-accent"
           step="25"
         />
         {errors.howAreYouFeeling && (
@@ -145,7 +145,7 @@ const HealthForm: React.FC<{ onSubmit: (data: any) => void }> = ({
           name="symptoms.present"
           checked={formState.symptoms.present}
           onChange={handleChange}
-          className="toggle"
+          className="toggle toggle-accent"
         />
         {formState.symptoms.present && (
           <div className="ml-6">
@@ -199,7 +199,7 @@ const HealthForm: React.FC<{ onSubmit: (data: any) => void }> = ({
           name="sideEffects.present"
           checked={formState.sideEffects.present}
           onChange={handleChange}
-          className="toggle"
+          className="toggle toggle-accent"
         />
         {formState.sideEffects.present && (
           <div className="ml-6">
@@ -271,7 +271,7 @@ const HealthForm: React.FC<{ onSubmit: (data: any) => void }> = ({
       </label>
 
       <div className="form-control w-full mb-4 max-w-md">
-        <button type="submit" className="btn btn-primary">
+        <button type="submit" className="btn btn-primary-color">
           Submit
         </button>
       </div>

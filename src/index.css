@@ -21,3 +21,13 @@
 .main-container {
   @apply max-w-md mx-auto px-4 pt-[90px];
 }
+
+.btn-primary-color {
+  background-color: #ff00b9;
+  color: #fff;
+}
+
+.btn-primary-color:hover {
+  background-color: #8f0067;
+  color: #fff;
+}

@@ -12,9 +12,14 @@ const fleekSdk = new FleekSdk({
 
 export const storeDataOnIPFS = async (metadata: any): Promise<string> => {
   // Upload metadata to IPFS
-
   const name = shortUUID().generate();
-  const metadataFile = createJsonFile(metadata, name);
+
+  const data = {
+    id: name,
+    ...metadata,
+  };
+
+  const metadataFile = createJsonFile(data, name);
 
   const metadataResponse = await fleekSdk.storage().uploadFile({
     file: metadataFile,

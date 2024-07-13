@@ -77,6 +77,22 @@ module.exports = {
   },
   plugins: [require("tailwindcss-animate"), daisyui],
   daisyui: {
-    themes: ["light", "dark", "valentine"],
+    themes: [
+      "light",
+      "dark",
+      {
+        valentine: {
+          ...require("daisyui/src/theming/themes")["valentine"],
+          accent: "#ff00b9",
+        },
+      },
+    ],
+  },
+  theme: {
+    extend: {
+      colors: {
+        accent: "#ff00b9",
+      },
+    },
   },
 };

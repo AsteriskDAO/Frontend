@@ -1,3 +1,4 @@
+import { router } from "@/main";
 import {
   DIAGNOSIS_SOURCE,
   DISORDER_SUBTYPE,
@@ -5,9 +6,11 @@ import {
   TREATMENT,
 } from "@/shared/consts";
 import { Profile } from "@/shared/types";
+import { useDynamicModals } from "@dynamic-labs/sdk-react-core";
 import { useState } from "react";
 import shortUUID from "short-uuid";
 export default () => {
+  const { setShowLinkNewWalletModal } = useDynamicModals();
   const localStorageProfile = window.localStorage.getItem("userProfile");
 
   const userProfile: Profile | null = localStorageProfile
@@ -39,6 +42,7 @@ export default () => {
   const [error, setError] = useState(false);
 
   const handleSubmit = async () => {
+    setShowLinkNewWalletModal(true);
     const short = shortUUID();
     console.log(short.generate());
 
@@ -68,6 +72,8 @@ export default () => {
     console.log("userProfile", JSON.stringify(profile));
 
     window.localStorage.setItem("userProfile", JSON.stringify(profile));
+
+    router.navigate("/");
   };
 
   return (
@@ -126,7 +132,7 @@ export default () => {
             value={medication}
             onChange={(e) => setMedication(e.target.value)}
           >
-            <option selected>Pick one</option>
+            <option selected>None</option>
             {MEDICATIONS.map((medication) => (
               <option key={medication}>{medication}</option>
             ))}
@@ -142,7 +148,7 @@ export default () => {
             value={treatment}
             onChange={(e) => setTreatment(e.target.value)}
           >
-            <option selected>Pick one</option>
+            <option selected>None</option>
             {TREATMENT.map((item) => (
               <option key={item}>{item}</option>
             ))}
@@ -190,7 +196,7 @@ export default () => {
             </span>
             <input
               type="checkbox"
-              className="toggle"
+              className="toggle toggle-accent"
               checked={focusGroup}
               onChange={(e) => setFocusGroup(e.target.checked)}
             />
@@ -206,7 +212,7 @@ export default () => {
           <div className="text-error mb-4">Please Fill all required fields</div>
         )}
       </div>
-      <button className="btn" onClick={handleSubmit}>
+      <button className="btn btn-primary-color w-full" onClick={handleSubmit}>
         Submit
       </button>
     </div>
