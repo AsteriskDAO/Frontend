@@ -7,10 +7,7 @@ import {
 import { Profile } from "@/shared/types";
 import { useState } from "react";
 import shortUUID from "short-uuid";
-import { useAccount } from "wagmi";
-
 export default () => {
-  const { isConnected } = useAccount();
   const localStorageProfile = window.localStorage.getItem("userProfile");
 
   const userProfile: Profile | null = localStorageProfile

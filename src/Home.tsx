@@ -1,13 +1,10 @@
 import { useAccount } from "wagmi";
-import Header from "./Header";
-import Identity from "./Identity";
 import { Link } from "react-router-dom";
 import Profile from "./profile/Profile";
 
 function Home() {
-  const { address, isConnected, chain } = useAccount();
+  const { isConnected } = useAccount();
 
-  console.log("address", address, "i", isConnected);
   return (
     <>
       {/* <Identity /> */}
