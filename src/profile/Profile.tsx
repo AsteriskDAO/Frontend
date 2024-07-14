@@ -9,7 +9,8 @@ import { Profile } from "@/shared/types";
 import { useDynamicContext } from "@dynamic-labs/sdk-react-core";
 import { useState } from "react";
 export default ({ onUpdate }: { onUpdate: () => void }) => {
-  const { setShowAuthFlow, isAuthenticated } = useDynamicContext();
+  const { setShowAuthFlow, isAuthenticated, primaryWallet } =
+    useDynamicContext();
   const localStorageProfile = window.localStorage.getItem("userProfile");
 
   let userProfile: Profile | null = localStorageProfile
@@ -44,6 +45,16 @@ export default ({ onUpdate }: { onUpdate: () => void }) => {
 
   const [error, setError] = useState(false);
 
+  const getSignature = async () => {
+    if (!primaryWallet) return;
+
+    const signature = await primaryWallet.connector.signMessage(
+      "Sign in with Asterisk"
+    );
+
+    return signature?.slice(0, 50);
+  };
+
   const handleSubmit = async () => {
     if (!isAuthenticated) {
       setShowAuthFlow(true);
@@ -75,6 +86,14 @@ export default ({ onUpdate }: { onUpdate: () => void }) => {
     console.log("userProfile", JSON.stringify(profile));
 
     window.localStorage.setItem("userProfile", JSON.stringify(profile));
+
+    const signature = await getSignature();
+
+    if (!signature) return;
+
+    localStorage.setItem("userSignature", signature);
+
+    console.log("signature", signature, signature?.length);
 
     onUpdate();
     router.navigate("/");
