@@ -15,7 +15,6 @@ export default () => {
   const { handleLogOut } = useDynamicContext();
 
   const handleProof = async (signature: any, dataStorageUUID: string) => {
-    console.log("signature", signature);
     let identity;
     try {
       identity = await createIdentity(signature);
@@ -24,22 +23,15 @@ export default () => {
       return;
     }
 
-    console.log("identity", identity);
-
     const { identityCommitments } = await readContractData();
 
-    console.log("identityCommitments", identityCommitments);
-
     if (!identityCommitments) return;
-
-    console.log("dataStorageUUID", dataStorageUUID);
 
     await createProof(identityCommitments, identity, dataStorageUUID);
   };
 
   const handleSubmit = async (data: any) => {
     setIsSubmitting(true);
-    console.log("data", data);
     const localStorageProfile = window.localStorage.getItem("userProfile");
 
     const profile: Profile | null = localStorageProfile
@@ -53,10 +45,7 @@ export default () => {
       ...data,
     };
 
-    console.log(dailyCheckIn);
-
     const fileName = await storeDataOnIPFS(dailyCheckIn);
-    console.log("fileName", fileName);
 
     const signature = localStorage.getItem("userSignature") || "";
     await handleProof(signature, fileName);

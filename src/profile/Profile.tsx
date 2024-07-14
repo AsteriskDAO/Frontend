@@ -60,9 +60,6 @@ export default ({ onUpdate }: { onUpdate: () => void }) => {
       setShowAuthFlow(true);
     }
 
-    console.log(
-      `diagnosisType: ${diagnosisType}; diagnosisSource: ${diagnosisSource}; medication: ${medication}; treatment: ${treatment}; disorderSubtype: ${disorderSubtype}; focusGroup: ${focusGroup}; firstSymptomsAge: ${firstSymptomsAge}`
-    );
     if (
       !diagnosisType ||
       !diagnosisSource ||
@@ -83,8 +80,6 @@ export default ({ onUpdate }: { onUpdate: () => void }) => {
       firstSymptomsAge,
     };
 
-    console.log("userProfile", JSON.stringify(profile));
-
     window.localStorage.setItem("userProfile", JSON.stringify(profile));
 
     const signature = await getSignature();
@@ -92,8 +87,6 @@ export default ({ onUpdate }: { onUpdate: () => void }) => {
     if (!signature) return;
 
     localStorage.setItem("userSignature", signature);
-
-    console.log("signature", signature, signature?.length);
 
     onUpdate();
     router.navigate("/");

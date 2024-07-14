@@ -21,11 +21,9 @@ export const storeDataOnIPFS = async (metadata: any): Promise<string> => {
 
   const metadataFile = createJsonFile(data, name);
 
-  const metadataResponse = await fleekSdk.storage().uploadFile({
+  await fleekSdk.storage().uploadFile({
     file: metadataFile,
   });
-
-  console.log("metadataResponse", metadataResponse);
 
   return name;
 };

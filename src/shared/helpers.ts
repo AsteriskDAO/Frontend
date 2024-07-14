@@ -2,7 +2,7 @@ import { createPublicClient, http, Address } from "viem";
 import { sepolia } from "viem/chains";
 import { Identity } from "@semaphore-protocol/identity";
 import { Group } from "@semaphore-protocol/group";
-import { generateProof, verifyProof } from "@semaphore-protocol/proof";
+import { generateProof } from "@semaphore-protocol/proof";
 import { abi } from "./abi";
 
 import { simulateContract, writeContract } from "@wagmi/core";
@@ -35,8 +35,6 @@ export const readContractData = async () => {
   } catch (e) {
     console.log("Error reading contract data", e);
   }
-
-  console.log({ daysSinceDeployment, identityCommitments });
 
   return { daysSinceDeployment, identityCommitments };
 };
@@ -72,9 +70,8 @@ export const createProof = async (
     zkey: "https://config.clonk.me/asterisk.zkey",
   };
 
-  let proof;
   try {
-    proof = await generateProof(
+    await generateProof(
       identity,
       group,
       message,
@@ -82,11 +79,6 @@ export const createProof = async (
       10,
       snarkArtifacts
     );
-    console.log("proof", proof);
-
-    const verified = await verifyProof(proof); // true or false.
-
-    console.log("verified", verified);
   } catch (e) {
     console.log("error", e);
   }
