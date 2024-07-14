@@ -16,6 +16,7 @@ import { EthereumWalletConnectors } from "@dynamic-labs/ethereum";
 import DailyCheckIn from "./dailyCheckIn/DailyCheckIn.tsx";
 import ProfilePage from "./profile/ProfilePage.tsx";
 import Home from "./Home.tsx";
+import ThankYou from "./ThankYou.tsx";
 
 globalThis.Buffer = Buffer;
 
@@ -57,6 +58,10 @@ export const router = createBrowserRouter([
       {
         path: "/check-in",
         element: <DailyCheckIn />,
+      },
+      {
+        path: "/thank-you",
+        element: <ThankYou />,
       },
     ],
   },

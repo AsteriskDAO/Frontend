@@ -8,7 +8,7 @@ import {
 import { Profile } from "@/shared/types";
 import { useDynamicContext } from "@dynamic-labs/sdk-react-core";
 import { useState } from "react";
-export default () => {
+export default ({ onUpdate }: { onUpdate: () => void }) => {
   const { setShowAuthFlow, isAuthenticated } = useDynamicContext();
   const localStorageProfile = window.localStorage.getItem("userProfile");
 
@@ -76,6 +76,7 @@ export default () => {
 
     window.localStorage.setItem("userProfile", JSON.stringify(profile));
 
+    onUpdate();
     router.navigate("/");
   };
 

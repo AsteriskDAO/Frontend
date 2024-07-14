@@ -1,10 +1,13 @@
 import { Link } from "react-router-dom";
 import Profile from "./profile/Profile";
 import { useDynamicContext } from "@dynamic-labs/sdk-react-core";
+import { useState } from "react";
 
 function Home() {
   const { isAuthenticated } = useDynamicContext();
-  const hasProfile = window.localStorage.getItem("userProfile");
+  const [hasProfile, setHasProfile] = useState(
+    !!window.localStorage.getItem("userProfile")
+  );
 
   return (
     <>
@@ -16,7 +19,11 @@ function Home() {
         </h1>
         {!isAuthenticated ? (
           <>
-            <Profile />
+            <Profile
+              onUpdate={() => {
+                setHasProfile(true);
+              }}
+            />
           </>
         ) : hasProfile ? (
           <>
@@ -31,7 +38,11 @@ function Home() {
           </>
         ) : (
           <>
-            <Profile />
+            <Profile
+              onUpdate={() => {
+                setHasProfile(true);
+              }}
+            />
           </>
         )}
       </div>

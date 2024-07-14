@@ -31,7 +31,7 @@ export default () => {
     console.log("fileName", fileName);
 
     handleLogOut();
-    router.navigate("/");
+    router.navigate("/thank-you");
   };
 
   return (

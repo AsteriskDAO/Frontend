@@ -114,6 +114,10 @@ const HealthForm: React.FC<{ onSubmit: (data: any) => void }> = ({
         <div className="label">
           <span className="label-text text-base">How Are You Feeling?</span>
         </div>
+        <div className="flex w-full justify-between px-2 text-xs mb-4">
+          <span>Terrible</span>
+          <span>Amazing</span>
+        </div>
         <input
           type="range"
           name="howAreYouFeeling"
